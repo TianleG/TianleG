@@ -179,6 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     function undo(){
+        if (!allowUndo()){
+            alert("You can't undo now");
+            return;
+        }
+        alert("观看广告 300 秒以获得撤销功能");
+        alert("宠你一次，广告免了(●'◡'●)");
         for (let i = 0; i < size; i++) {
             for (let j = 0; j < size; j++) {
                 const tile = board[i * size + j];
@@ -274,15 +280,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return returnObj;
     }
 
+    function allowUndo(){
+        // TODO
+        return true
+    }
+
     function resetGame() {
-        board.forEach(tile => {
-            tile.innerHTML = '';
-            tile.className = 'tile';
-        });
-        score = 0;
-        updateScore();
-        generateTile();
-        generateTile();
+        if (confirm("Are you sure you want to reset the game?")) {
+            board.forEach(tile => {
+                tile.innerHTML = '';
+                tile.className = 'tile';
+            });
+            score = 0;
+            updateScore();
+            generateTile();
+            generateTile();
+        }
     }
     document.addEventListener('keyup', control);
 
