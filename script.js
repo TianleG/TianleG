@@ -220,17 +220,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function control(e) {
-        if (e.keyCode === 37 || e.target === leftButton) {
-            // left
+        if (e.keyCode === 37) {
             moveTiles('left');
-        } else if (e.keyCode === 38 || e.target === upButton) {
-            // up
+        } else if (e.keyCode === 38 ) {
             moveTiles('up');
-        } else if (e.keyCode === 39 || e.target === rightButton) {
-            // right
+        } else if (e.keyCode === 39) {
             moveTiles('right');
-        } else if (e.keyCode === 40 || e.target === downButton) {
-            // down
+        } else if (e.keyCode === 40) {
             moveTiles('down');
         }
     }
@@ -269,12 +265,20 @@ document.addEventListener('DOMContentLoaded', () => {
         generateTile();
         generateTile();
     }
-
     document.addEventListener('keyup', control);
-    upButton.addEventListener('click', control);
-    downButton.addEventListener('click', control);
-    leftButton.addEventListener('click', control);
-    rightButton.addEventListener('click', control);
+
+    upButton.onclick = function() {
+        moveTiles('up');
+    }
+    downButton.onclick = function() {
+        moveTiles('down');
+    }
+    leftButton.onclick = function() {
+        moveTiles('left');
+    }
+    rightButton.onclick = function() {
+        moveTiles('right');
+    }
     resetButton.addEventListener('click', resetGame);
     createBoard();
 });
