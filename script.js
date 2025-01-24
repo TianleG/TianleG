@@ -2,12 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameBoard = document.getElementById('game-board');
     const scoreDisplay = document.getElementById('score');
     const resetButton = document.getElementById('reset-button');
+    const undoButton = document.getElementById('undo-button');
     const upButton = document.getElementById('up-button');
     const downButton = document.getElementById('down-button');
     const leftButton = document.getElementById('left-button');
     const rightButton = document.getElementById('right-button');
     const size = 4;
     const board = [];
+    let pureBoard = Array(size * size).fill(0);
+    let pureBoardLast = [...pureBoard];
     let score = 0;
     let moved = false;
 
@@ -20,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         generateTile();
         generateTile();
+        pureBoard = Array.from(board, tile => parseInt(tile.innerHTML || 0));
+        pureBoardLast = [...pureBoard];
     }
 
     function generateTile() {
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let zeros = Array(missing).fill(0);
             newRow = newRow.concat(zeros);
             if (!moved) {
-                moved = !newRow.every((val, index) => val === row[index]);
+                moved = !newRow.every((val, index) => val == row[index]);
             }
             newBoard = newBoard.concat(newRow);
         }
@@ -80,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let zeros = Array(missing).fill(0);
             newRow = zeros.concat(newRow);
             if (!moved) {
-                moved = !newRow.every((val, index) => val === row[index]);
+                moved = !newRow.every((val, index) => val == row[index]);
             }
             newBoard = newBoard.concat(newRow);
         }
@@ -109,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let zeros = Array(missing).fill(0);
             newLine = newLine.concat(zeros);
             if (!moved) {
-                moved = !newLine.every((val, index) => val === line[index]);
+                moved = !newLine.every((val, index) => val == line[index]);
             }
             for (let j = 0; j < size; j++) {
                 newBoard[j * size + i] = newLine[j];
@@ -147,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let zeros = Array(missing).fill(0);
             newLine = zeros.concat(newLine);
             if (!moved) {
-                moved = !newLine.every((val, index) => val === line[index]);
+                moved = !newLine.every((val, index) => val == line[index]);
             }
             for (let j = 0; j < size; j++) {
                 newBoard[j * size + i] = newLine[j];
@@ -173,6 +178,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+    function undo(){
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                const tile = board[i * size + j];
+                tile.innerHTML = pureBoardLast[i * size + j] || '';
+                tile.className = 'tile';
+                if (pureBoardLast[i * size + j]) {
+                    tile.classList.add(`tile-${pureBoardLast[i * size + j]}`);
+                }
+            }
+        }
+    }
 
     function moveTiles(direction) {
         moved = false;
@@ -192,7 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
         if (moved) {
+            pureBoardLast = Array.from(board, tile => parseInt(tile.innerHTML || 0));
             updateBoard(newBoard);
+            pureBoard = Array.from(board, tile => parseInt(tile.innerHTML || 0));
             setTimeout(() => {
                 updateScore();
                 generateTile();
@@ -280,5 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
         moveTiles('right');
     }
     resetButton.addEventListener('click', resetGame);
+    undoButton.addEventListener('click', undo);
     createBoard();
 });
