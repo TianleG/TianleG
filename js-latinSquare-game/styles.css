@@ -1,0 +1,483 @@
+html{
+    width: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    background-color: #faf8ef;
+    font-family: 'Arial', sans-serif;
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    min-width: 30%;
+    min-height: 600px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+h1 {
+    color: #34495e;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.controls {
+    margin: 0.5rem 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+button,
+select {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button {
+    background: #3498db;
+    color: white;
+    font-weight: 500;
+}
+
+button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+select {
+    background: #ecf0f1;
+    color: #2c3e50;
+    border: 2px solid #bdc3c7;
+}
+
+select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+#gameBoard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 1.5rem auto;
+}
+
+.row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.cell {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #bdc3c7;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.cell:hover {
+    border-color: #3498db;
+}
+
+.cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3498db;
+    border-radius: 6px;
+    padding: 0;  /* Remove padding */
+    margin: 0;   /* Remove margin */
+    box-sizing: border-box; /* Include padding and border in element's width and height */
+    -moz-appearance: textfield; /* Remove spinner buttons in Firefox */
+}
+
+/* Remove spinner buttons in Chrome/Safari/Edge */
+.cell input::-webkit-outer-spin-button,
+.cell input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.cell input:focus {
+    outline: none;
+    background: #f7f9fc;
+}
+
+.cell.fixed {
+    background: #ecf0f1;
+    color: #2c3e50;
+    border-color: #95a5a6;
+}
+
+.cell.selectable {
+    cursor: pointer;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.cell.selectable:hover {
+    background: #e9ecef;
+    transform: scale(1.02);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.cell.selected {
+    background: #e3f2fd;
+    border: 2px solid #1e88e5;
+    transform: scale(1.05);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.cell.selected::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid #1e88e5;
+    border-radius: 6px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.number-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.number-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #bdc3c7;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.number-btn:hover {
+    background: #f0f0f0;
+    border-color: #3498db;
+}
+
+.help-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.question-mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background: #6ba7ac;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    padding: 15px;
+    background: #ecf0f1;
+    border: 2px solid #6ba7ac;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    cursor: default;
+}
+
+.help-icon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip h3 {
+    color: #6ba7ac;
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.tooltip p {
+    color: #6ba7ac;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#message {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.error {
+    color: #e74c3c;
+    background: #fde8e7;
+}
+
+.success {
+    color: #27ae60;
+    background: #e8f6ef;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.dialog.active {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 2.0s ease-out;
+}
+
+.secondary-btn {
+    background: #95a5a6 !important;
+}
+
+.secondary-btn:hover {
+    background: #7f8c8d !important;
+}
+
+.solution-wrapper {
+    display: none;  /* 移除原有的查看答案按钮容器 */
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+
+.action-buttons button {
+    min-width: 120px;
+}
+
+@media (max-width: 600px) {
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+    .game-title {
+        align-items: baseline;
+        position: relative;  /* 添加相对定位 */
+        padding: 0 1rem;    /* 添加左右内边距 */
+        box-sizing: border-box;
+    }
+
+    .game-title h1 {
+        font-size: 24px;
+        /* 添加：缩小标题字体 */
+    }
+
+    .game-container {
+        width: 70%;
+        position: relative;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    .cell {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .cell input {
+        font-size: 1.2rem;
+    }
+
+    .controls {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .controls button, .controls select {
+        flex: 1 1 auto;
+    }
+
+    .controls button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .controls select {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        grid-row: 2;
+    }
+
+    /* 创建两列布局，让新游戏和提交按钮并排 */
+    #newGame, #checkSolution {
+        display: inline-block;
+    }
+
+    /* 设置按钮容器 */
+    .controls div:first-child {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
+    }
+
+    .tooltip {
+        width: 200px;          /* 减小提示框宽度 */
+        left: auto;            /* 重置左定位 */
+        right: 0;             /* 靠右对齐 */
+        transform: none;       /* 移除transform */
+        font-size: 0.9rem;    /* 减小字体大小 */
+    }
+
+    .tooltip p {
+        font-size: 0.8rem;    /* 减小段落字体大小 */
+        margin: 3px 0;        /* 减小段落间距 */
+    }
+
+    .tooltip h3 {
+        font-size: 1rem;      /* 减小标题字体大小 */
+        margin-bottom: 5px;   /* 减小标题下方间距 */
+    }
+
+    .number-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .solution-wrapper {
+        margin-top: 0.5rem;
+    }
+
+    .solution-wrapper button {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+    }
+
+    .action-buttons button {
+        width: 100%;
+        max-width: 200px;
+    }
+}

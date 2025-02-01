@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latin Square Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-title">
+        <h1>Submarine's LatinSquare</h1>
+        <div class="help-icon">
+            <span class="question-mark">?</span>
+            <div class="tooltip">
+                <h3>游戏规则：</h3>
+                <p>1. 在空格中填入数字 1 到 N </p>
+                <p>2. 每行和每列中不能出现重复数字</p>
+                <p>3. 灰色格子是预设数字，不能修改</p>
+                <p>4. 完成填写后点击"提交"检查答案</p>
+                <p>5. 成功后可以选择挑战更大的方阵</p>
+            </div>
+        </div>
+    </div>
+    <div class="game-container">
+        <div class="controls">
+            <button id="newGame">新游戏</button>
+            <select id="sizeSelect">
+                <option value="3">3x3</option>
+                <option value="4">4x4</option>
+                <option value="5">5x5</option>
+            </select>
+        </div>
+        <div id="gameBoard"></div>
+        <div id="numberSelector" class="number-selector"></div>
+        <div id="message"></div>
+        <div class="action-buttons">
+            <button id="showSolution" class="secondary-btn">查看答案</button>
+            <button id="checkSolution">提交</button>
+        </div>
+    </div>
+
+    <div class="dialog-overlay" id="nextLevelDialog">
+        <div class="dialog">
+            <h3>挑战成功！</h3>
+            <p>是否继续挑战下一关？</p>
+            <div class="dialog-buttons">
+                <button id="continueGame">继续挑战</button>
+                <button id="stayHere">留在当前</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

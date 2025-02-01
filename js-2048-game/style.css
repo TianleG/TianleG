@@ -1,0 +1,313 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    background-color: #faf8ef;
+    font-family: 'Arial', sans-serif;
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* width: 40%; */
+    height: 100%;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 10px;
+    background-color: #bbada0;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    background-color: #cdc1b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.tile-2 {
+    background-color: #eee4da;
+}
+
+.tile-4 {
+    background-color: #ede0c8;
+}
+
+.tile-8 {
+    background-color: #f2b179;
+}
+
+.tile-16 {
+    background-color: #f59563;
+}
+
+.tile-32 {
+    background-color: #f67c5f;
+}
+
+.tile-64 {
+    background-color: #f65e3b;
+}
+
+.tile-128 {
+    background-color: #edcf72;
+}
+
+.tile-256 {
+    background-color: #edcc61;
+}
+
+.tile-512 {
+    background-color: #edc850;
+}
+
+.tile-1024 {
+    background-color: #edc53f;
+}
+
+.tile-2048 {
+    background-color: #edc22e;
+}
+
+.game-helper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80px;
+    border:solid 3px #776e65;
+    border-radius: 5px;
+}
+
+#score-label {
+    font-size: 18px;
+    color: #776e65;
+    margin-bottom: 5px;
+}
+
+#score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #776e65;
+}
+
+#undo-button {
+    width: 80px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #8f7a66;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+#reset-button {
+    width: 80px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #8f7a66;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#undo-button:hover, #reset-button:hover {
+    background-color: #776e65;
+}
+
+.control-helper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.control-helper button {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #8f7a66;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.control-helper button:hover {
+    background-color: #776e65;
+}
+
+.help-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.question-mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background: #8f7a66;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    padding: 15px;
+    background: #f9f6f2;
+    border: 2px solid #8f7a66;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    cursor: default;
+}
+
+.help-icon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip h3 {
+    color: #776e65;
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.tooltip p {
+    color: #776e65;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+
+    html, body {
+        height: 100%;
+        overflow: hidden;  /* 防止页面滚动 */
+    }
+
+    body {
+        padding: 10px 0;  /* 减小上下padding */
+        box-sizing: border-box;
+    }
+
+    .game-container {
+        width: 90%;
+        height: 100%;
+        padding: 0;  /* 移除padding */
+    }
+
+    .game-board {
+        grid-template-columns: repeat(4, 65px);  /* 增大格子尺寸 */
+        grid-template-rows: repeat(4, 65px);
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .game-helper {
+        margin-top: 20px;  /* 减小上边距 */
+        margin-bottom: 10px;  /* 减小下边距 */
+    }
+
+    .tile {
+        width: 100%;
+        height: 100%;
+        font-size: 18px;
+    }
+
+    .control-helper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .control-helper button {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    #reset-button, #undo-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .score-container {
+        align-items: center;
+    }
+
+    #score {
+        font-size: 18px;
+    }
+
+    .tooltip {
+        width: 200px;
+        font-size: 12px;
+        left: -100px;
+        transform: none;
+    }
+
+    .game-title {
+        margin-bottom: 10px;  /* 减小标题下方间距 */
+    }
+
+    .game-title h1 {
+        font-size: 24px;  /* 添加：缩小标题字体 */
+    }
+}
