@@ -83,27 +83,32 @@ class LatinSquareGame {
             for (let j = 0; j < this.size; j++) {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
-
+                const content = document.createElement('span');
                 if (this.board[i][j].fixed) {
-                    const content = document.createElement('span');
                     content.className = 'cell-content';
                     content.textContent = this.board[i][j].value;
                     cell.classList.add('fixed');
                     cell.appendChild(content);
                 } else {
                     cell.classList.add('selectable');
-                    const content = document.createElement('span');
                     content.className = 'cell-content';
                     cell.appendChild(content);
                     cell.dataset.row = i;
                     cell.dataset.col = j;
                     cell.addEventListener('click', (e) => this.handleCellClick(e));
                 }
+                cell.style.width = `${100 / this.size}%`;
+                // 控制高度，保证每个格子都是正方形
+                cell.style.height = `0`;
+                cell.style.paddingTop = `${50 / this.size}%`;
+                cell.style.paddingBottom = `${50 / this.size}%`;
 
+                
                 row.appendChild(cell);
             }
             gameBoard.appendChild(row);
         }
+
     }
 
     handleCellClick(event) {
@@ -232,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 添加对话框按钮事件监听
     document.getElementById('continueGame').addEventListener('click', () => {
         const currentSize = parseInt(document.getElementById('sizeSelect').value);
-        if (currentSize < 5) {  // 最大限制为5x5
+        if (currentSize < 8) {  // 最大限制为8x8
             const nextSize = currentSize + 1;
             document.getElementById('sizeSelect').value = nextSize;
             game = new LatinSquareGame(nextSize);
