@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="controls">
+        <input type="file" id="upload" accept="image/*">
+        <button id="rotateLeft" onmousedown="startRotation(-1)" ontouchstart="startRotation(-1)">
+            ↺ 逆时针
+        </button>
+        <button id="rotateRight" onmousedown="startRotation(1)" ontouchstart="startRotation(1)">
+            ↻ 顺时针
+        </button>
+    </div>
+    <div class="container">
+        <div class="section">
+            <canvas id="originalCanvas"></canvas>
+        </div>
+        <div id="mirror"></div>
+        <div class="section mirror-frame">
+            <div class="screw tl"></div>
+            <div class="screw tr"></div>
+            <div class="screw bl"></div>
+            <div class="screw br"></div>
+            <canvas id="mirrorCanvas"></canvas>
+        </div>
+    </div>
+    <div id="rotation-indicator">
+        X: <span id="rotX">0</span>° 
+        Y: <span id="rotY">0</span>°
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字华容道</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-title">
+        <h1>Submarine's 数字华容道</h1>
+        <div class="help-icon">
+            <span class="question-mark">?</span>
+            <div class="tooltip">
+                <h3>游戏规则：</h3>
+                <p>1. 点击空位附近单元格移动空位</p>
+                <p>2. 空位只能上下左右移动</p>
+                <p>3. 将数字按顺序排好即为成功</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="game-container">
+            <div class="settings">
+                <label>选择规模：
+                    <select id="size-select">
+                        <option value="3">3x3</option>
+                        <option value="4" selected>4x4</option>
+                        <option value="5">5x5</option>
+                    </select>
+                </label>
+            </div>
+            <div id="game-board" class="game-board"></div>
+            <div class="controls">
+                <button id="reset-btn">新游戏</button>
+                <div>步数: <span id="steps">0</span></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

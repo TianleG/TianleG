@@ -1,0 +1,198 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.help-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.question-mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background: #6ba7ac;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    padding: 15px;
+    background: #ecf0f1;
+    border: 2px solid #6ba7ac;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    cursor: default;
+}
+
+.help-icon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip h3 {
+    color: #6ba7ac;
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.tooltip p {
+    color: #6ba7ac;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.container {
+    text-align: center;
+}
+
+.game-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.settings {
+    margin-bottom: 15px;
+}
+
+.game-board {
+    width: 400px;
+    height: 400px;
+    background: #333;
+    border-radius: 5px;
+    display: grid;
+    gap: 5px;
+    padding: 5px;
+    margin: 20px auto;
+}
+
+.tile {
+    background: #4CAF50;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 3px;
+}
+
+.tile:hover {
+    background: #45a049;
+}
+
+.tile.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+select {
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* 新增移动端适配 */
+@media (max-width: 600px) {
+    .game-container {
+        width: 80vw;
+        padding: 10px;
+    }
+
+    .game-board {
+        width: 90vw;
+        height: 90vw;
+        max-width: 400px;
+        max-height: 400px;
+        gap: 3px;
+        padding: 3px;
+    }
+
+    .tile {
+        font-size: 18px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .solution-steps {
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        max-height: 40vh;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    select {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tile {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+}
